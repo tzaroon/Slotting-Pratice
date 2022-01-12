@@ -60,4 +60,4 @@ stages:
               deployToSlotOrASE: true
               resourceGroupName: 'testing'
               slotName: 'production'
-              package: '$(Build.ArtifactStagingDirectory)'
+              package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
