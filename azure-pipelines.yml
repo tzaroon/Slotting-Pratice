@@ -21,8 +21,8 @@ stages:
     steps:
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: '$(Build.BinariesDirectory)'
-        includeRootFolder: false
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: true
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         replaceExistingArchive: true
