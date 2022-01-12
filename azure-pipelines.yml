@@ -1,0 +1,46 @@
+# PHP
+# Test and package your PHP project.
+# Add steps that run tests, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/php
+
+trigger:
+- dev
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  phpVersion: 7.2
+  subs: 'Microsoft Partner Network(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
+
+stages:
+- stage: Zipping
+  displayName: Zipping the file
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/s'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
+    # - task: PublishPipelineArtifact@1
+    #   inputs:
+    #     targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    #     # targetPath: '$(System.DefaultWorkingDirectory)'
+    #     artifact: 'drop'
+    #     publishLocation: 'pipeline'
+        
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Microsoft Partner Network(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
+        appType: 'webAppLinux'
+        WebAppName: 'tzaroon'
+        deployToSlotOrASE: true
+        ResourceGroupName: 'Practice'
+        SlotName: 'production'
+        packageForLinux: '$(System.ArtifactsDirectory)'
