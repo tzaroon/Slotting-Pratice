@@ -12,14 +12,24 @@ pool:
 variables:
   phpVersion: 7.2
 
-steps:
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Microsoft Partner Network(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
-    appType: 'webAppLinux'
-    WebAppName: 'tzaroon'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'Practice'
-    SlotName: 'production'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+stages:
+- stage: zipping
+  displayName: Zipping the file
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)'
+        publishLocation: 'pipeline'
+      
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Microsoft Partner Network(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
+        appType: 'webAppLinux'
+        WebAppName: 'tzaroon'
+        deployToSlotOrASE: true
+        ResourceGroupName: 'Practice'
+        SlotName: 'production'
+        packageForLinux: '
