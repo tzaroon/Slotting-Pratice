@@ -19,18 +19,18 @@ stages:
   jobs:
   - job: BuildJob
     steps:
-    # - task: ArchiveFiles@2
-    #   inputs:
-    #     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-    #     includeRootFolder: true
-    #     archiveType: 'zip'
-    #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    #     replaceExistingArchive: true
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/s/$(Build.BuildId).zip'
+        replaceExistingArchive: true
 
     - task: PublishPipelineArtifact@1
       inputs:
-        # targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        targetPath: '$(System.DefaultWorkingDirectory)'
+        targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        # targetPath: '$(System.DefaultWorkingDirectory)'
         artifact: 'drop'
         publishLocation: 'pipeline'
         
@@ -43,4 +43,4 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'Practice'
         SlotName: 'production'
-        packageForLinux: '$(System.ArtifactsDirectory)/*'
+        packageForLinux: '$(System.ArtifactsDirectory)'
