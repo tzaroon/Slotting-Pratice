@@ -51,7 +51,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App ourwebsite'
             inputs:
-              azureSubscription: 'Microsoft Partner Network(1)(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
+              azureSubscription: 'Microsoft Partner Network(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
               appType: 'webAppLinux'
               appName: 'tzaroon'
               deployToSlotOrASE: true
