@@ -29,7 +29,7 @@ stages:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
+        targetPath: '$(Build.ArtifactStagingDirectory)/a'
         artifact: 'drop'
         publishLocation: 'pipeline'
         
@@ -42,4 +42,4 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'Practice'
         SlotName: 'production'
-        packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'       
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/drop/$(Build.BuildId).zip'       
