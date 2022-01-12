@@ -50,6 +50,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App ourwebsite'
             inputs:
-              azureSubscription: $(azureSubscription)
-              appName: $(webAppName)
-              package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+              azureSubscription: 'pipeline'
+              appType: 'webAppLinux'
+              appName: 'tzaroon'
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
