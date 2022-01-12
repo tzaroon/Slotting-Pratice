@@ -42,4 +42,4 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'Practice'
         SlotName: 'production'
-        packageForLinux: '$(System.DefaultWorkingDirectory)'       
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'       
