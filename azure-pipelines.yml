@@ -34,22 +34,13 @@ stages:
         artifact: 'drop'
         publishLocation: 'pipeline'
         
-- stage: Deploy
-  displayName: 'Deploy Web App'
-  dependsOn: Zipping
-  condition: succeeded()
-  jobs:
-  - deployment: DeploymentJob
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: 'Microsoft Partner Network(1)(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
-              appType: 'webAppLinux'
-              appName: 'tzaroon'
-              deployToSlotOrASE: true
-              resourceGroupName: 'Practice'
-              slotName: 'dev'
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Microsoft Partner Network(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
+        appType: 'webAppLinux'
+        WebAppName: 'tzaroon'
+        deployToSlotOrASE: true
+        ResourceGroupName: 'Practice'
+        SlotName: 'dev'
+        packageForLinux: '$(System.ArtifactsDirectory)'
