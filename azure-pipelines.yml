@@ -24,15 +24,15 @@ stages:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
         includeRootFolder: true
         archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/s/$(Build.BuildId).zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         replaceExistingArchive: true
 
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        # targetPath: '$(System.DefaultWorkingDirectory)'
-        artifact: 'drop'
-        publishLocation: 'pipeline'
+    # - task: PublishPipelineArtifact@1
+    #   inputs:
+    #     targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    #     # targetPath: '$(System.DefaultWorkingDirectory)'
+    #     artifact: 'drop'
+    #     publishLocation: 'pipeline'
         
     - task: AzureRmWebAppDeployment@4
       inputs:
