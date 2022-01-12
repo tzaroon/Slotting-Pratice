@@ -14,7 +14,7 @@ variables:
   subs: 'Microsoft Partner Network(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
 
 stages:
-- stage: Zipping
+- stage: Build
   displayName: Zipping the file
   jobs:
   - job: BuildJob
