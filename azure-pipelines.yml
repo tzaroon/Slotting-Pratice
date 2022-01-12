@@ -42,4 +42,4 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'Practice'
         SlotName: 'production'
-        packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'       
+        packageForLinux: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip       
