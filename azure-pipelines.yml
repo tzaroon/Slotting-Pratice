@@ -36,7 +36,7 @@ stages:
         
 - stage: Deploy
   displayName: 'Deploy Web App'
-  dependsOn: Build
+  dependsOn: Zipping
   condition: succeeded()
   jobs:
   - deployment: DeploymentJob
