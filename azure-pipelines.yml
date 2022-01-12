@@ -29,7 +29,7 @@ stages:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)/a'
+        targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         artifact: 'drop'
         publishLocation: 'pipeline'
         
