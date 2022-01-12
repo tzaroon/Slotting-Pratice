@@ -32,4 +32,4 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'Practice'
         SlotName: 'production'
-        packageForLinux: '
+        packageForLinux: 'Null'
