@@ -11,18 +11,28 @@ pool:
 
 variables:
   phpVersion: 7.2
+  subs: 'Microsoft Partner Network(eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
 
 stages:
-- stage: zipping
+- stage: Zipping
   displayName: Zipping the file
   jobs:
   - job: BuildJob
     steps:
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(Pipeline.Workspace)'
+        artifact: 'drop'
         publishLocation: 'pipeline'
-      
+        
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
@@ -32,4 +42,4 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'Practice'
         SlotName: 'production'
-        packageForLinux: 'Null'
+        packageForLinux: '$(System.DefaultWorkingDirectory)'       
