@@ -6,7 +6,8 @@
 trigger:
 - main
 
-
+pool:
+  vmImage: ubuntu-latest
 
 variables:
   phpVersion: 7.2
@@ -19,8 +20,8 @@ stages:
   displayName: Zipping the file
   jobs:
   - job: BuildJob
-    pool:
-      vmImage: $(vmImageName)
+    # pool:
+    #   vmImage: $(vmImageName)
     steps:
     - task: ArchiveFiles@2
       inputs:
@@ -43,8 +44,8 @@ stages:
   condition: succeeded()
   jobs:
   - deployment: DeploymentJob
-    pool:
-        vmImage: $(vmImageName)
+    # pool:
+    #     vmImage: $(vmImageName)
     environment: $(environmentName)
     strategy:
       runOnce:
@@ -59,4 +60,4 @@ stages:
               deployToSlotOrASE: true
               resourceGroupName: 'testing'
               slotName: 'production'
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              package: '$(Build.ArtifactStagingDirectory)'
