@@ -48,5 +48,5 @@ stages:
         deployToSlotOrASE: true
         resourceGroupName: 'testing'
         slotName: 'production'
-        package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+        package: '$(System.ArtifactsDirectory)/drop/$(Build.BuildId).zip'
 
